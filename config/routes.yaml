@@ -3,5 +3,5 @@
 #    controller: App\Controller\DefaultController::index
 
 pro_stage_accueil:
-    path: /accueil
+    path: /
     controller: App\Controller\ProStageController::index
