@@ -3,20 +3,72 @@
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}ProStages{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
+        {% block stylesheets %}
+        <link rel="stylesheet" href="{{asset('/css/bootstrap.min.css')}}">
+        {% endblock %}
     </head>
     <body>
-        {% block filter %}
-            <h1>-------------- FILTER --------------</h1>
-        {% endblock %}
         
-        {% block menu %}
-        <h1>-------------- MENU --------------</h1>
+        {% block menu %}  
         {% endblock %}
-        {% block contenu %}{% endblock %}
+
+        {% block contenu %}
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-9">
+                    <table class="table table-dark">
+                            <thead>
+                              <tr>
+                                <th scope="col">Formation</th>
+                                <th scope="col">Entreprise</th>
+                                <th scope="col">Stage</th>
+                                <th scope="col">Contact</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td>DUT Info</td>
+                                <td>bizKor</td>
+                                <td>Stage de développement JavaScript</td>
+                                <td>contact@bizkor.fr</td>
+                              </tr>
+                              <tr>
+                                <td>BTS</td>
+                                <td>Total</td>
+                                <td>Stage de data analyst</td>
+                                <td>contatc@total.fr</td>
+                              </tr>
+                              <tr>
+                                <td>Licence Professionnelle</td>
+                                <td>Fiducial</td>
+                                <td>Stage de développement d'application comptable</td>
+                                <td>contact@fiducial.fr</td>
+                              </tr>
+                            </tbody>
+                    </table>
+                </div>
+                <div class="col-md-3">
+                    <center><h1>Trier par : </h1></center></br>
+                    <div class="list-group">
+                        <a href="http://iparla.iutbayonne.univ-pau.fr:8012/entreprises" class="list-group-item list-group-item-action">
+                            Trier la liste par les entreprises
+                        </a>
+                        <a href="http://iparla.iutbayonne.univ-pau.fr:8012/formations" class="list-group-item list-group-item-action">Trier la liste par les formations</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        {% endblock %}
+
         {% block footer %}
         <h1>-------------- FOOTER --------------</h1>
         {% endblock %}
-        {% block javascripts %}{% endblock %}
+
+        {% block javascripts %}
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="{{asset('/js/bootstrap.min.js')}}"></script>
+        {% endblock %}
     </body>
 </html>
