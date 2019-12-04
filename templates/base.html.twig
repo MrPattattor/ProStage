@@ -4,6 +4,7 @@
         <meta charset="UTF-8">
         <title>{% block title %}ProStages{% endblock %}</title>
         {% block stylesheets %}
+        <link rel="stylesheet" href="{{asset('/css/fontello.css')}}">
         <link rel="stylesheet" href="{{asset('/css/bootstrap.min.css')}}">
         {% endblock %}
     </head>
@@ -13,6 +14,7 @@
         {% endblock %}
 
         {% block contenu %}
+    </br></br></br>
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-9">
@@ -21,13 +23,13 @@
                               <tr>
                                 <th scope="col">Formation</th>
                                 <th scope="col">Entreprise</th>
-                                <th scope="col">Stage</th>
-                                <th scope="col">Contact</th>
+                                <th scope="col">Proposition</th>
+                                <th scope="col">Mail</th>
                               </tr>
                             </thead>
                             <tbody>
                               <tr>
-                                <td>DUT Info</td>
+                                <td>DUT Informatique</td>
                                 <td>bizKor</td>
                                 <td>Stage de développement JavaScript</td>
                                 <td>contact@bizkor.fr</td>
@@ -35,7 +37,7 @@
                               <tr>
                                 <td>BTS</td>
                                 <td>Total</td>
-                                <td>Stage de data analyst</td>
+                                <td>Stageb de data analyst</td>
                                 <td>contatc@total.fr</td>
                               </tr>
                               <tr>
@@ -48,12 +50,12 @@
                     </table>
                 </div>
                 <div class="col-md-3">
-                    <center><h1>Trier par : </h1></center></br>
+                  <center><h1>Trier par : </h1></center></br>
                     <div class="list-group">
-                        <a href="http://iparla.iutbayonne.univ-pau.fr:8012/entreprises" class="list-group-item list-group-item-action">
-                            Trier la liste par les entreprises
+                        <a href="entreprises" class="list-group-item list-group-item-action ">
+                            La liste des entreprises
                         </a>
-                        <a href="http://iparla.iutbayonne.univ-pau.fr:8012/formations" class="list-group-item list-group-item-action">Trier la liste par les formations</a>
+                        <a href="formations" class="list-group-item list-group-item-action">La liste des formations</a>
                     </div>
                 </div>
             </div>
@@ -62,7 +64,7 @@
         {% endblock %}
 
         {% block footer %}
-        <h1>-------------- FOOTER --------------</h1>
+        <p>Site réalisé avec les frameworks <a href="https://symfony.com/">Symfony</a> et <a href="https://getbootstrap.com/">BootStrap</a>.</p>
         {% endblock %}
 
         {% block javascripts %}
