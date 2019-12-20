@@ -6,51 +6,14 @@ use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use App\Entity\Formation;
 use App\Entity\Entreprise;
+use App\Entity\Stage;
+
 class AppFixtures extends Fixture
 {
     public function load(ObjectManager $manager)
     {
         //Créateur d'un générateur de données Faker
         $faker = \Faker\Factory::create('fr_FR');
-        
-        //Génération de données de test Formation en dur
-        $formationDUTInfo = new Formation();
-        $formationDUTInfo->setNomLong("Diplôme Universitaire et Technologique Informatique");
-        $formationDUTInfo->setNomCourt("DUT Info");
-
-
-        $formationLPMul = new Formation();
-        $formationLPMul->setNomLong("Licence Professionnelle Multimédia");
-        $formationLPMul->setNomCourt("LP Multimédia");
-
-
-        $formationDUTIC = new Formation();
-        $formationDUTIC->setNomLong("Diplôme Universitaire en Technologies de l'Information et de la Communication");
-        $formationDUTIC->setNomCourt("DU TIC");
-
-        $TableauFormation = array($formationDUTInfo, 
-                                  $formationLPMul, 
-                                  $formationDUTIC);
-
-        foreach($TableauFormations as $formation) {
-            $manager->persist($formation);
-        }
-
-        //Génération de données de test Entreprise avec Faker dans une boucle itérative
-        /*
-        $nbEntreprises = 7;
-
-        for ($i = 0 ; $i <= $nbEntreprises ; $i++) {
-
-            $Entreprise = new Entreprise();
-
-            $Entreprise->setNom($faker->regexify('[A-Z][a-z]{5,12}'));
-            $EntrepriseFiducial->setActivite($faker->realText($maxNbChars = 150, $indexSize = 2));
-            $EntrepriseFiducial->setAdresse($faker->address);
-            $EntrepriseFiducial->setSiteWeb($faker->url);            
-        
-            $manager->persist($Entreprise);
-        }*/
 
         //Génération des données de test Entreprise
         $EntrepriseFiducial = new Entreprise();
@@ -123,36 +86,94 @@ class AppFixtures extends Fixture
             $manager->persist($entreprise);
         }
 
+        /* Formations 1ère version
+        $formationDUTInfo = new Formation();
+        $formationDUTInfo->setNomLong("Diplôme Universitaire et Technologique Informatique");
+        $formationDUTInfo->setNomCourt("DUT Info");
 
-        //Génération des données de test Stage
-        $nbStageAGenerer = $faker->numberBetween($min = 0, $max = 8);
-        for ($numStage = 0; $numStage < $nbStageAGenerer; $nbStageAGenerer++) {
-            $Stage = new Stage();
-            $Stage->setTitre($faker->sentence($nbWords = 5, $variableNbWords = true));
-            $Stage->setDescription($faker->realText($maxNbChars = 200, $indexSize = 2));
-            $Stage->setEmail($faker->companyEmail);
+
+        $formationLPMul = new Formation();
+        $formationLPMul->setNomLong("Licence Professionnelle Multimédia");
+        $formationLPMul->setNomCourt("LP Multimédia");
+
+
+        $formationDUTIC = new Formation();
+        $formationDUTIC->setNomLong("Diplôme Universitaire en Technologies de l'Information et de la Communication");
+        $formationDUTIC->setNomCourt("DU TIC");
+
+        $TableauFormation = array($formationDUTInfo, 
+                                  $formationLPMul, 
+                                  $formationDUTIC);
+
+        foreach($TableauFormations as $formation) {
+            $manager->persist($formation);
+        }
+        */
+
+        //Génération de données de test Formation
+        $TableauFormations = array(
+            "DUT INFO" => "Diplôme Universitaire et Technologique Informatique",
+            "LP Multimédia" => "Licence Professionnelle Multimédia",
+            "DU TIC" => "Diplôme Universitaire en Technologies de l'Information et de la Communication",
+            );
+        
+
+                    /********************************************************
+                    *** CREATION DES STAGES ET DE LEURS FORMATIONS ASSOCIEES ***
+                    *********************************************************/
+        foreach ($TableauFormations as $nomCourt => $nomLong) {
+            // ************* Création d'une nouvelle formation *************
+            $FormationCourrante = new Formation();
+            // Définition du nom court
+            $FormationCourrante->setNomCourt($nomCourt);
+            // Définition du nom long
+            $FormationCourrante->setNomLong($nomLong);
+            // Enregistrement de la formation créée
+            $manager->persist($FormationCourrante);
             
-            //Création de la relation Stage --> Formation
-            $Stage
+            //Génération des données de test Stage
+            $nbStageAGenerer = $faker->numberBetween($min = 0, $max = 8);
+            for ($numStage = 0; $numStage < $nbStageAGenerer; $numStage++) {
+                $Stage = new Stage();
+                $Stage->setTitre($faker->jobTitle);
+                $Stage->setDescription($faker->realText($maxNbChars = 200, $indexSize = 2));
+                $Stage->setEmail($faker->companyEmail);
+                
+                //Création de la relation Stage --> Formation
+                $Stage->addFormation($FormationCourrante);
 
-            //Sélectionne une Formation au hasard
-            $Stage->addFormation($formation);
+                //Sélectionner une Entreprise au hasard parmi les 7 dans $TableauEntreprises
+                $numEntreprise = $faker->numberBetween($min = 0, $max = 6);
 
-            //Sélectionner une Entreprise au hasard parmi les 7 dans $TableauEntreprises
-            $numEntreprise = $faker->numberBetween($min = 0, $max = 6);
+                //Création relation Stage --> Entreprise
+                $Stage->setNomEntreprise($TableauEntreprises[$numEntreprise]);
 
-            //Création relation Stage --> Entreprise
-            $Stage->setEntreprise($TableauEntreprises[$numEntreprise]);
+                //Création relation Entreprise --> Stage
+                $TableauEntreprises[$numStage]->addStage($Stage);
 
-            //Création relation Entreprise --> Stage
-            $TableauEntreprises[$numStage]->addStage($Stage);
-
-            //Persistez les éléments modifiés
-            $manager->persist($Stage);
-            $manager->persist($TableauEntreprises[$numEntreprise]);
+                //Persistez les éléments modifiés
+                $manager->persist($Stage);
+                $manager->persist($TableauEntreprises[$numEntreprise]);
+            }        
         }
 
-        //Envoyer les données en BD
+        /*Génération de données de test Entreprise avec Faker dans une boucle itérative
+        
+        $nbEntreprises = 7;
+
+        for ($i = 0 ; $i <= $nbEntreprises ; $i++) {
+
+            $Entreprise = new Entreprise();
+
+            $Entreprise->setNom($faker->regexify('[A-Z][a-z]{5,12}'));
+            $EntrepriseFiducial->setActivite($faker->realText($maxNbChars = 150, $indexSize = 2));
+            $EntrepriseFiducial->setAdresse($faker->address);
+            $EntrepriseFiducial->setSiteWeb($faker->url);            
+        
+            $manager->persist($Entreprise);
+        }*/
+
+        //Envoyer les objets en BD
         $manager->flush();
     }
 }
