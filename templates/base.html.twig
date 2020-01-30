@@ -22,51 +22,8 @@
           </div>
         </div>
       </div>
-        {% block contenu %}
-    </br></br></br>
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-8">
-                    <table class="table table-dark">
-                            <thead>
-                              <tr>
-                                <th scope="col">Formation</th>
-                                <th scope="col">Entreprise</th>
-                                <th scope="col">Proposition</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                              <tr>
-                                <td>DUT Informatique</td>
-                                <td>bizKor</td>
-                                <td>Stage de développement JavaScript</td>
-                              </tr>
-                              <tr>
-                                <td>BTS</td>
-                                <td>Total</td>
-                                <td>Stageb de data analyst</td>
-                              </tr>
-                              <tr>
-                                <td>Licence Professionnelle</td>
-                                <td>Fiducial</td>
-                                <td>Stage de développement d'application comptable</td>
-                              </tr>
-                            </tbody>
-                    </table>
-                </div>
-                <div class="col-md-1"></div>
-                <div class="col-md-3">
-                  <center><h1>Trier par : </h1></center></br>
-                    <div class="list-group">
-                        <a href="{{path('pro_stage_entreprises')}}" class="list-group-item">
-                            La liste des entreprises
-                        </a>
-                        <a href="{{path('pro_stage_formations')}}" class="list-group-item">La liste des formations</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
+      
+        {% block contenu %}        
         {% endblock %}
 
         {% block footer %}
