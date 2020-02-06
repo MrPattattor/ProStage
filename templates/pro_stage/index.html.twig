@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block contenu %}
+    </br></br></br>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-8">
+                    <table class="table table-dark">
+                            <thead>
+                              <tr>
+                                <th scope="col">Proposition</th>
+                                <th scope="col">Entreprise</th>
+                                <th scope="col">Formation</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                                {% for stageCourant in stages %}
+                              <tr>
+                                <td>
+                                <a href="{{path('pro_stage_stages',{id:stageCourant.id})}}" style = "color:white; text-decoration:none">
+                                {{stageCourant.titre}}
+                                </a>
+                                </td>
+                                <td>{{stageCourant.nomEntreprise.getNom}}</td>
+                                <td>{{stageCourant.email}}</td>
+                              </tr>
+                              {% endfor %}
+                            </tbody>
+                    </table>
+                </div>
+                <div class="col-md-1"></div>
+                <div class="col-md-3">
+                  <center><h1>Trier par : </h1></center></br>
+                    <div class="list-group">
+                        <a href="{{path('pro_stage_entreprises')}}" class="list-group-item">
+                            La liste des entreprises
+                        </a>
+                        <a href="{{path('pro_stage_formations')}}" class="list-group-item">La liste des formations</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        {% endblock %}
+
