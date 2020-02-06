@@ -121,8 +121,11 @@ class AppFixtures extends Fixture
                     /********************************************************
                     *** CREATION DES STAGES ET DE LEURS FORMATIONS ASSOCIEES ***
                     *********************************************************/
+
+
         foreach ($TableauFormations as $nomCourt => $nomLong) {
-            // ************* Création d'une nouvelle formation *************
+
+            // ************* Création d'une nouvelle formation ************* //
             $FormationCourrante = new Formation();
             // Définition du nom court
             $FormationCourrante->setNomCourt($nomCourt);

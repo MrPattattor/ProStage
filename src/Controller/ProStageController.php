@@ -34,9 +34,8 @@ class ProStageController extends AbstractController
         return $this->render('pro_stage/formations.html.twig');
     }
 
-    public function indexStages($id)
-    {
-
+    public function indexStages($id){
+        
         //Récupérer le repository de l'entité Stage
         $repositoryStage = $this->getDoctrine()->getRepository(Stage::class);
 
