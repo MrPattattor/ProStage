@@ -1,7 +1,43 @@
 {% extends 'base.html.twig' %}
 
 {% block contenu %}
-
-<h1> Cette page affichera la liste des entreprises proposant un stage aux étudiants !!!</h1>
+<center><h2>Les Entreprises</h2></center>
+</br></br></br>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-8">
+                    <table class="table table-dark">
+                            <thead>
+                              <tr>
+                                <th scope="col">Nom</th>
+                                <th scope="col">Adresse</th>
+                                <th scope="col">Site Web</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                                {% for entrepriseCourante in entreprises %}
+                              <tr>
+                                <td>
+                                {{entrepriseCourante.nom}}
+                                </td>
+                                <td>{{entrepriseCourante.adresse}}</td>
+                                <td>{{entrepriseCourante.siteWeb}}</td>
+                              </tr>
+                              {% endfor %}
+                            </tbody>
+                    </table>
+                </div>
+                <div class="col-md-1"></div>
+                <div class="col-md-3">
+                  <center><h1>Trier par : </h1></center></br>
+                    <div class="list-group">
+                        <a href="{{path('pro_stage_entreprises')}}" class="list-group-item">
+                            La liste des entreprises
+                        </a>
+                        <a href="{{path('pro_stage_formations')}}" class="list-group-item">La liste des formations</a>
+                    </div>
+                </div>
+            </div>
+        </div>
 
 {% endblock %}
