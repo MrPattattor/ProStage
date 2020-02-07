@@ -1,6 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block contenu %}
+<center><h2>Les Stages</h2></center>
     </br></br></br>
         <div class="container-fluid">
             <div class="row">
@@ -22,7 +23,12 @@
                                 </a>
                                 </td>
                                 <td>{{stageCourant.nomEntreprise.getNom}}</td>
-                                <td>{{stageCourant.email}}</td>
+                                <td>{% for formationCourante in stageCourant.formations %}
+                                      {{formationCourante.nomCourt}}
+                                      -
+                                      {{formationCourante.nomLong}} </br>
+                                      {% endfor %}
+                                </td>
                               </tr>
                               {% endfor %}
                             </tbody>
