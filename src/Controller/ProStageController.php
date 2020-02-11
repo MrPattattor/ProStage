@@ -19,7 +19,7 @@ class ProStageController extends AbstractController
     public function indexAccueil(StageRepository $repositoryStage)
     {
         //Récupérer les stages en BD
-        $stages = $repositoryStage->findAll();
+        $stages = $repositoryStage->findByTitre();
 
         //Envoyer les stages récupérés à la vue qui a pour but de les afficher
         return $this->render('pro_stage/index.html.twig', ['stages'=>$stages]);
@@ -46,7 +46,15 @@ class ProStageController extends AbstractController
     public function indexStages(Stage $stage)
     {    
         //Envoyer le stage récupéré à la vue chargée de les afficher
-        return $this->render('pro_stage/stages.html.twig', 
-        ['stage' => $stage]);
+        return $this->render('pro_stage/stages.html.twig', ['stage' => $stage]);
+    }
+
+    public function indexStagesParEntreprise()
+    {
+        //Récupérer les entreprises en BD
+        $entreprises = $repositoryEntreprise->findAll();
+        
+        //Envoyer les entreprises récupérées à la vue chargée de les afficher
+        return $this->render('pro_stage/entreprises.html.twig', ['entreprises'=>$entreprises]);
     }
 }
