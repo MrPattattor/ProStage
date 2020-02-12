@@ -60,4 +60,20 @@ class StageRepository extends ServiceEntityRepository
             ->getResult()
         ;
     }
+
+    /**
+      * @return Stage[] Returns an array of Stage objects
+    */
+
+    public function findByNomEntreprise($nomEntreprise)
+    {
+        return $this->createQueryBuilder('s')
+            ->join('s.nomEntreprise', 'e')
+            ->andWhere('e.nom = :nomEntreprise')
+            ->setParameter('nomEntreprise', $nomEntreprise)
+            ->orderBy('s.titre', 'ASC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 }

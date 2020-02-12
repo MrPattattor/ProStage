@@ -22,7 +22,11 @@
                                 {{stageCourant.titre}}
                                 </a>
                                 </td>
-                                <td>{{stageCourant.nomEntreprise.getNom}}</td>
+                                <td>
+                                <a href="{{path('pro_stage_stages_par_nom_entreprise',{nomEntreprise:stageCourant.nomEntreprise.getNom})}}" style = "color:white; text-decoration:none">
+                                {{stageCourant.nomEntreprise.getNom}}
+                                </a>
+                                </td>
                                 <td>{% for formationCourante in stageCourant.formations %}
                                       {{formationCourante.nomCourt}}
                                       -

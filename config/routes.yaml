@@ -17,3 +17,7 @@ pro_stage_formations:
 pro_stage_stages:
     path: /stages/{id}
     controller: App\Controller\ProStageController::indexStages
+
+pro_stage_stages_par_nom_entreprise:
+    path: /entreprises/{nomEntreprise}
+    controller: App\Controller\ProStageController::indexStagesParNomEntreprise
