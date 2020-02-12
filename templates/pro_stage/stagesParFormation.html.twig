@@ -23,16 +23,12 @@
                                 </a>
                                 </td>
                                 <td>
-                                <a href="{{path('pro_stage_stages_par_nom_entreprise',{nomEntreprise:stageCourant.nomEntreprise.getNom})}}" style = "color:white; text-decoration:none">
-                                {{stageCourant.nomEntreprise.getNom}}
-                                </a>
+                                {{stageCourant.email}}
                                 </td>
                                 <td>{% for formationCourante in stageCourant.formations %}
-                                  <a href="{{path('pro_stage_stages_par_formation',{nomCourt:formationCourante.nomCourt})}}" style = "color:white; text-decoration:none">
                                       {{formationCourante.nomCourt}}
                                       -
                                       {{formationCourante.nomLong}} </br>
-                                  </a>
                                       {% endfor %}
                                 </td>
                               </tr>

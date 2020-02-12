@@ -19,10 +19,14 @@
           {% for formationCourante in formations %}
           <tr>
             <td>
+            <a href="{{path('pro_stage_stages_par_formation',{nomCourt:formationCourante.nomCourt})}}" style = "color:white; text-decoration:none">
               {{formationCourante.getNomCourt}}
+            </a>
             </td>
             <td>
+            <a href="{{path('pro_stage_stages_par_formation',{nomCourt:formationCourante.nomCourt})}}" style = "color:white; text-decoration:none">
               {{formationCourante.nomLong}}
+            </a>
             </td>
           </tr>
           {% endfor %}

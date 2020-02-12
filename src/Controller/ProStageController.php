@@ -57,4 +57,13 @@ class ProStageController extends AbstractController
         //Envoyer les stages récupérés à la vue qui a pour but de les afficher
         return $this->render('pro_stage/stagesParEntreprise.html.twig', ['stages'=>$stages]);
     }
+
+    public function indexStagesParFormation(StageRepository $repositoryStage, $nomCourt)
+    {
+        //Récupérer les stages en BD
+        $stages = $repositoryStage->findByFormation($nomCourt);
+
+        //Envoyer les stages récupérés à la vue qui a pour but de les afficher
+        return $this->render('pro_stage/stagesParFormation.html.twig', ['stages'=>$stages]);
+    }
 }
