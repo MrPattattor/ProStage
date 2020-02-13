@@ -54,11 +54,43 @@ class StageRepository extends ServiceEntityRepository
     
     public function findByTitre()
     {
-        return $this->createQueryBuilder('s')
-            ->orderBy('s.titre', 'ASC')
-            ->getQuery()
-            ->getResult()
-        ;
+        //Récupérer le gestionnaire d'entités
+        $entityManager = $this->getEntityManager();
+
+        //Construction de la requête
+        $request = $entityManager->createQuery(
+            'SELECT s, f, e
+             FROM App\Entity\Stage s
+             JOIN s.formations f
+             JOIN s.nomEntreprise e
+             ORDER BY s.titre');
+            
+            //Exécuter la requête et retourner les résultats
+            return $request->execute();
+    }
+
+    /**
+      * @return Stage[] Returns an array of Stage objects
+    */
+    
+    public function getStage($id)
+    {
+        //Récupérer le gestionnaire d'entités
+        $entityManager = $this->getEntityManager();
+
+        //Construction de la requête
+        $request = $entityManager->createQuery(
+            'SELECT s, f, e
+             FROM App\Entity\Stage s
+             JOIN s.formations f
+             JOIN s.nomEntreprise e
+             WHERE s.id = :id');
+
+            //Associer le paramètre à la valeur recherchée
+            $request->setParameter('id', $id);
+            
+            //Exécuter la requête et retourner les résultats
+            return $request->execute();
     }
 
     /**
@@ -69,6 +101,7 @@ class StageRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('s')
             ->join('s.nomEntreprise', 'e')
+            ->join('s.formations', 'f')
             ->andWhere('e.nom = :nomEntreprise')
             ->setParameter('nomEntreprise', $nomEntreprise)
             ->orderBy('s.titre', 'ASC')
@@ -88,9 +121,10 @@ class StageRepository extends ServiceEntityRepository
 
         //Construction de la requête
         $request = $entityManager->createQuery(
-            'SELECT s, f 
+            'SELECT s, f, e
              FROM App\Entity\Stage s
              JOIN s.formations f
+             JOIN s.nomEntreprise e
              WHERE f.nomCourt = :nomCourtFormation');
             
             //Associer le paramètre à la valeur recherchée

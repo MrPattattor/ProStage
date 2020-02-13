@@ -3,7 +3,11 @@
 {% block contenu %}
 
 <center>
-<h1>{{stage.titre}}</h1>
+<h1 class = "display-4">
+    {%for stageCourant in stage %}
+    {{stageCourant.titre}}
+    {% endfor %}
+</h1>
 </center>
 
 </br></br></br></br>
@@ -16,25 +20,27 @@
             <div class="col-md-9">
                 
 <ul class = "list-group">
+    {%for stageCourant in stage %}
     <li class = "list-group-item"> <strong>Nom de l'entreprise : </strong>
-        {{stage.nomEntreprise.getNom}}
+        {{stageCourant.nomEntreprise.getNom}}
     </li>
 
     <li class = "list-group-item"> <strong>Description : </strong>
-        {{stage.description}}
+        {{stageCourant.description}}
     </li>
 
     <li class = "list-group-item"> <strong>Email : </strong>
-        {{stage.email}}
+        {{stageCourant.email}}
     </li>
 
     <li class = "list-group-item"> <strong>Formations concernées : </strong>
-        {% for formationCourante in stage.formations %}
+        {% for formationCourante in stageCourant.formations %}
             {{formationCourante.nomCourt}}
             -
             {{formationCourante.nomLong}} </br>
         {% endfor %}
     </li>
+    {% endfor %}
 </ul>                
             </div>
             <div class="col-md-3">

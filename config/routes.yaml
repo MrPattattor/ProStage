@@ -25,3 +25,7 @@ pro_stage_stages_par_nom_entreprise:
 pro_stage_stages_par_formation:
     path: /formations/{nomCourt}
     controller: App\Controller\ProStageController::indexStagesParFormation
+
+pro_stage_ajout_entreprise:
+    path: /entreprise/add
+    controller: App\Controller\ProStageController::indexAjoutEntreprise

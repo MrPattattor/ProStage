@@ -25,6 +25,12 @@ class ProStageController extends AbstractController
         return $this->render('pro_stage/index.html.twig', ['stages'=>$stages]);
     }
 
+    public function indexAjoutEntreprise()
+    {
+        //Afficher la page présentant le formulaire d'ajout d'une entreprise
+        return $this->render('pro_stage/ajoutEntreprise.html.twig');
+    }
+
     public function indexEntreprises(EntrepriseRepository $repositoryEntreprise)
     {
         //Récupérer les entreprises en BD
@@ -43,8 +49,11 @@ class ProStageController extends AbstractController
         return $this->render('pro_stage/formations.html.twig', ['formations'=>$formations]);
     }
 
-    public function indexStages(Stage $stage)
+    public function indexStages(StageRepository $repositoryStage, $id)
     {    
+        //Récupérer le stage en BD
+        $stage = $repositoryStage->getStage($id);
+        
         //Envoyer le stage récupéré à la vue chargée de les afficher
         return $this->render('pro_stage/stages.html.twig', ['stage' => $stage]);
     }
@@ -55,7 +64,7 @@ class ProStageController extends AbstractController
         $stages = $repositoryStage->findByNomEntreprise($nomEntreprise);
 
         //Envoyer les stages récupérés à la vue qui a pour but de les afficher
-        return $this->render('pro_stage/stagesParEntreprise.html.twig', ['stages'=>$stages]);
+        return $this->render('pro_stage/index.html.twig', ['stages'=>$stages]);
     }
 
     public function indexStagesParFormation(StageRepository $repositoryStage, $nomCourt)
@@ -64,6 +73,6 @@ class ProStageController extends AbstractController
         $stages = $repositoryStage->findByFormation($nomCourt);
 
         //Envoyer les stages récupérés à la vue qui a pour but de les afficher
-        return $this->render('pro_stage/stagesParFormation.html.twig', ['stages'=>$stages]);
+        return $this->render('pro_stage/index.html.twig', ['stages'=>$stages]);
     }
 }
