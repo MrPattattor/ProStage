@@ -27,8 +27,19 @@ class ProStageController extends AbstractController
 
     public function indexAjoutEntreprise()
     {
+        //Création d'une entreprise vierge qui sera remplie par le formulaire
+        $entreprise = new Entreprise();
+
+        //Création du formulaire permettant de saisir une entreprise
+        $formulaireEntreprise = $this->createFormBuilder($entreprise)
+        ->add('nom')
+        ->add('activite')
+        ->add('adresse')
+        ->add('siteWeb')
+        ->getForm();
+
         //Afficher la page présentant le formulaire d'ajout d'une entreprise
-        return $this->render('pro_stage/ajoutEntreprise.html.twig');
+        return $this->render('pro_stage/ajoutEntreprise.html.twig', ['vueFormulaire' => $formulaireEntreprise->createView()]);
     }
 
     public function indexEntreprises(EntrepriseRepository $repositoryEntreprise)
