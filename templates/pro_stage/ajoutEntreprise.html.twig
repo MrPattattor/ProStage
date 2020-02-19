@@ -14,15 +14,15 @@
                 {{ form_start(vueFormulaire) }}
 
                 
-                {{ form_row(vueFormulaire.nom) }}
+                {{ form_row(vueFormulaire.nom, {'attr' : {'placeholder':"Nom de l'entreprise..."}}) }}
 
                 <label>Activité</label>
-                {{ form_widget(vueFormulaire.activite) }}
+                {{ form_widget(vueFormulaire.activite, {'attr' : {'placeholder':"Activité de l'entreprise..."}}) }}
                 {{ form_errors(vueFormulaire.nom) }}
 
-                {{ form_row(vueFormulaire.adresse) }}
+                {{ form_row(vueFormulaire.adresse, {'attr' : {'placeholder':"Adresse de l'entreprise..."}}) }}
 
-                {{ form_row(vueFormulaire.siteWeb) }}
+                {{ form_row(vueFormulaire.siteWeb, {'attr' : {'placeholder':"https://example.com"}}) }}
 
                 {{ form_end(vueFormulaire) }}
             </div>
