@@ -8,7 +8,24 @@
 </br></br>
 </br></br>
 </center>
-{{ form(vueFormulaire) }}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-9">
+                {{ form_start(vueFormulaire) }}
 
+                
+                {{ form_row(vueFormulaire.nom) }}
 
+                <label>Activité</label>
+                {{ form_widget(vueFormulaire.activite) }}
+                {{ form_errors(vueFormulaire.nom) }}
+
+                {{ form_row(vueFormulaire.adresse) }}
+
+                {{ form_row(vueFormulaire.siteWeb) }}
+
+                {{ form_end(vueFormulaire) }}
+            </div>
+        </div>
+    </div>
 {% endblock %}
