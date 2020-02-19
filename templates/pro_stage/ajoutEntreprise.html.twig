@@ -6,7 +6,6 @@
     Enregistrer votre nouvelle entreprise
 </h3>
 </br></br>
-</br></br>
 </center>
     <div class="container-fluid">
         <div class="row">
@@ -14,15 +13,17 @@
                 {{ form_start(vueFormulaire) }}
 
                 
-                {{ form_row(vueFormulaire.nom, {'attr' : {'placeholder':"Nom de l'entreprise..."}}) }}
+                {{ form_row(vueFormulaire.nom, {'attr' : {'placeholder':"Lauak, Fiducial, Technoflex, ..."}}) }}
 
                 <label>Activité</label>
                 {{ form_widget(vueFormulaire.activite, {'attr' : {'placeholder':"Activité de l'entreprise..."}}) }}
                 {{ form_errors(vueFormulaire.nom) }}
 
-                {{ form_row(vueFormulaire.adresse, {'attr' : {'placeholder':"Adresse de l'entreprise..."}}) }}
+                {{ form_row(vueFormulaire.adresse, {'attr' : {'placeholder':"3 Chemin du Gaspalon 64530 PONTACQ"}}) }}
 
                 {{ form_row(vueFormulaire.siteWeb, {'attr' : {'placeholder':"https://example.com"}}) }}
+
+                <button type="submit" class="btn btn-dark">Enregistrer</button>
 
                 {{ form_end(vueFormulaire) }}
             </div>
