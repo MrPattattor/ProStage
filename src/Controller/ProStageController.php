@@ -69,7 +69,7 @@ class ProStageController extends AbstractController
         $stage = $repositoryStage->getStage($id);
         
         //Envoyer le stage récupéré à la vue chargée de les afficher
-        return $this->render('pro_stage/stages.html.twig', ['stage' => $stage]);
+        return $this->render('pro_stage/stage.html.twig', ['stage' => $stage]);
     }
 
     public function indexStagesParNomEntreprise(StageRepository $repositoryStage, $nomEntreprise)
