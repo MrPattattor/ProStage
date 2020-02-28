@@ -14,18 +14,24 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-9">
-                {{ form_start(vueFormulaire) }}
+                {{ form_start(vueFormulaire, {'attr':{'novalidate':'novalidate'}}) }}
 
-                
-                {{ form_row(vueFormulaire.nom, {'attr' : {'placeholder':"Lauak, Fiducial, Technoflex, ..."}}) }}
+                <label>Nom</label>
+                {{ form_widget(vueFormulaire.nom, {'attr' : {'placeholder':"Lauak, Fiducial, Technoflex, ..."}}) }}
+                {{ form_errors(vueFormulaire.nom) }}<br>
 
                 <label>Activité</label>
                 {{ form_widget(vueFormulaire.activite, {'attr' : {'placeholder':"Activité de l'entreprise..."}}) }}
-                {{ form_errors(vueFormulaire.nom) }}
+                {{ form_errors(vueFormulaire.activite) }}<br>
 
-                {{ form_row(vueFormulaire.adresse, {'attr' : {'placeholder':"3 Chemin du Gaspalon 64530 PONTACQ"}}) }}
+                <label>Adresse</label>
+                {{ form_widget(vueFormulaire.adresse, {'attr' : {'placeholder':"3 Chemin du Gaspalon 64530 PONTACQ"}}) }}
+                {{ form_errors(vueFormulaire.adresse) }}<br>
 
-                {{ form_row(vueFormulaire.siteWeb, {'attr' : {'placeholder':"https://example.com"}}) }}
+
+                <label>Site Web</label>
+                {{ form_widget(vueFormulaire.siteWeb, {'attr' : {'placeholder':"https://example.com"}}) }}
+                {{ form_errors(vueFormulaire.siteWeb) }}<br>
 
                 <button type="submit" class="btn btn-dark">Enregistrer</button>
 
