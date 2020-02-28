@@ -30,6 +30,7 @@ class ProStageController extends AbstractController
         return $this->render('pro_stage/index.html.twig', ['stages'=>$stages]);
     }
 
+
     public function indexAjoutEntreprise(Request $request, ObjectManager $manager)
     {
         //Création d'une entreprise vierge qui sera remplie par le formulaire
@@ -59,8 +60,41 @@ class ProStageController extends AbstractController
         }
 
         //Afficher la page présentant le formulaire d'ajout d'une entreprise
-        return $this->render('pro_stage/ajoutEntreprise.html.twig', ['vueFormulaire' => $formulaireEntreprise->createView()]);
+        return $this->render('pro_stage/ajoutModifEntreprise.html.twig', ['vueFormulaire' => $formulaireEntreprise->createView(), 
+        'action'=>"ajouter"]);
     }
+
+
+    public function indexModifEntreprise(Request $request, ObjectManager $manager, Entreprise $entreprise)
+    {
+        //Création du formulaire permettant de saisir une entreprise
+        $formulaireEntreprise = $this->createFormBuilder($entreprise)
+        ->add('nom', TextType::class)
+        ->add('activite', TextareaType::class)
+        ->add('adresse', TextType::class)
+        ->add('siteWeb', UrlType::class)
+        ->getForm();
+
+        /* On demande au formulaire d'analyser la dernière requête Http. Si le tableau POST contenu dans cette requête contient
+        des variables nom, activite, etc. Alors la méthode handleRequest() recupère les valeurs de ces variables et les
+        affecte à l'objet $entreprise. */
+        $formulaireEntreprise->handleRequest($request);
+
+        if ($formulaireEntreprise->isSubmitted())
+        {
+            //Enregistrer l'entreprise en base de données
+            $manager->persist($entreprise);
+            $manager->flush();
+
+            //Rediriger l'utilisateur vers la page d'accueil
+            return $this->redirectToRoute('pro_stage_accueil');
+        }
+
+        //Afficher la page présentant le formulaire d'ajout d'une entreprise
+        return $this->render('pro_stage/ajoutModifEntreprise.html.twig', ['vueFormulaire' => $formulaireEntreprise->createView(), 
+        'action'=>"modifier"]);
+    }
+
 
     public function indexEntreprises(EntrepriseRepository $repositoryEntreprise)
     {
@@ -71,6 +105,7 @@ class ProStageController extends AbstractController
         return $this->render('pro_stage/entreprises.html.twig', ['entreprises'=>$entreprises]);
     }
 
+
     public function indexFormations(FormationRepository $repositoryFormation)
     {
         //Récupérer les formations en BD
@@ -79,6 +114,7 @@ class ProStageController extends AbstractController
         //Envoyer les formations récupérées à la vue chargée de les afficher
         return $this->render('pro_stage/formations.html.twig', ['formations'=>$formations]);
     }
+
 
     public function indexStages(StageRepository $repositoryStage, $id)
     {    
@@ -89,6 +125,7 @@ class ProStageController extends AbstractController
         return $this->render('pro_stage/stage.html.twig', ['stage' => $stage]);
     }
 
+
     public function indexStagesParNomEntreprise(StageRepository $repositoryStage, $nomEntreprise)
     {
         //Récupérer les stages en BD
@@ -97,6 +134,7 @@ class ProStageController extends AbstractController
         //Envoyer les stages récupérés à la vue qui a pour but de les afficher
         return $this->render('pro_stage/index.html.twig', ['stages'=>$stages]);
     }
+
 
     public function indexStagesParFormation(StageRepository $repositoryStage, $nomCourt)
     {

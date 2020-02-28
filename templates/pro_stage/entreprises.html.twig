@@ -24,6 +24,9 @@
                                 </td>
                                 <td>{{entrepriseCourante.adresse}}</td>
                                 <td>{{entrepriseCourante.siteWeb}}</td>
+                                
+                                <td> <a href="{{path('pro_stage_modification_entreprise', {id:entrepriseCourante.id})}} class="link"><i class="icon-edit" style = "color:white; text-decoration:none"></i></a> </td>
+                                
                               </tr>
                               {% endfor %}
                             </tbody>

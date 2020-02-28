@@ -29,3 +29,7 @@ pro_stage_stages_par_formation:
 pro_stage_ajout_entreprise:
     path: /entreprise/add
     controller: App\Controller\ProStageController::indexAjoutEntreprise
+
+pro_stage_modification_entreprise:
+    path: /entreprise/modify/{id}
+    controller: App\Controller\ProStageController::indexModifEntreprise

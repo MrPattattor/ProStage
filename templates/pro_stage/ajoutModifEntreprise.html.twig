@@ -3,7 +3,11 @@
 {% block contenu %}
 <center>
 <h3 class = "display-4">
-    Enregistrer votre nouvelle entreprise
+    {% if action == "ajouter" %}
+    Enregistrez votre nouvelle entreprise
+    {% else %}
+    Apportez vos modifications à l'entreprise
+    {% endif %}
 </h3>
 </br></br>
 </center>
