@@ -10,11 +10,9 @@ use App\Entity\Formation;
 use App\Repository\StageRepository;
 use App\Repository\EntrepriseRepository;
 use App\Repository\FormationRepository;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Common\Persistence\ObjectManager;
+use App\Form\EntrepriseType;
 
 class ProStageController extends AbstractController
 {
@@ -37,12 +35,7 @@ class ProStageController extends AbstractController
         $entreprise = new Entreprise();
 
         //Création du formulaire permettant de saisir une entreprise
-        $formulaireEntreprise = $this->createFormBuilder($entreprise)
-        ->add('nom', TextType::class)
-        ->add('activite', TextareaType::class)
-        ->add('adresse', TextType::class)
-        ->add('siteWeb', UrlType::class)
-        ->getForm();
+        $formulaireEntreprise = $this->createForm(EntrepriseType::class, $entreprise);
 
         /* On demande au formulaire d'analyser la dernière requête Http. Si le tableau POST contenu dans cette requête contient
         des variables nom, activite, etc. Alors la méthode handleRequest() recupère les valeurs de ces variables et les
@@ -67,13 +60,8 @@ class ProStageController extends AbstractController
 
     public function indexModifEntreprise(Request $request, ObjectManager $manager, Entreprise $entreprise)
     {
-        //Création du formulaire permettant de saisir une entreprise
-        $formulaireEntreprise = $this->createFormBuilder($entreprise)
-        ->add('nom', TextType::class)
-        ->add('activite', TextareaType::class)
-        ->add('adresse', TextType::class)
-        ->add('siteWeb', UrlType::class)
-        ->getForm();
+        //Création du formulaire permettant de modifier une entreprise
+        $formulaireEntreprise = $this->createForm(EntrepriseType::class, $entreprise);
 
         /* On demande au formulaire d'analyser la dernière requête Http. Si le tableau POST contenu dans cette requête contient
         des variables nom, activite, etc. Alors la méthode handleRequest() recupère les valeurs de ces variables et les
