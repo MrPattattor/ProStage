@@ -18,15 +18,16 @@ class StageType extends AbstractType
             ->add('titre')
             ->add('description', TextareaType::class)
             ->add('email')
-/*           ->add('nomEntreprise', EntityType::class, array(
+            ->add('nomEntreprise', EntityType::class, array(
 
-                'class'=>Entreprise::class,
+                'class' => Entreprise::class,
+                'choice_label' => 'nom',
 
-                'choice_label'=> 'username',
+                'multiple' => false,
+                'expanded' => true,
             )
-            
             );
-*/        ;
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver)

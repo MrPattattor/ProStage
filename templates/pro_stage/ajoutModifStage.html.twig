@@ -28,6 +28,8 @@
                 {{ form_widget(vueFormulaire.email, {'attr' : {'placeholder':"example@gmail.com"}}) }}
                 {{ form_errors(vueFormulaire.email) }}<br>
 
+                {{ form_row(vueFormulaire.nomEntreprise, {'label': "Entreprise"}) }}
+
                 <button type="submit" class="btn btn-dark">Enregistrer</button>
 
                 {{ form_end(vueFormulaire) }}
