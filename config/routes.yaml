@@ -33,3 +33,11 @@ pro_stage_ajout_entreprise:
 pro_stage_modification_entreprise:
     path: /entreprise/modify/{id}
     controller: App\Controller\ProStageController::indexModifEntreprise
+
+pro_stage_ajout_stage:
+    path: /stage/add
+    controller: App\Controller\ProStageController::indexAjoutStage
+
+pro_stage_modification_stage:
+    path: /stage/modify/{id}
+    controller: App\Controller\ProStageController::indexModifStage

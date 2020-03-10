@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block contenu %}
+<center>
+<h3 class = "display-4">
+    {% if action == "ajouter" %}
+    Enregistrez votre nouveau stage
+    {% else %}
+    Apportez vos modifications au stage
+    {% endif %}
+</h3>
+</br></br>
+</center>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-9">
+                {{ form_start(vueFormulaire, {'attr':{'novalidate':'novalidate'}}) }}
+
+                <label>Titre</label>
+                {{ form_widget(vueFormulaire.titre, {'attr' : {'placeholder':"Développeur Web"}}) }}
+                {{ form_errors(vueFormulaire.titre) }}<br>
+
+                <label>Description</label>
+                {{ form_widget(vueFormulaire.description, {'attr' : {'placeholder':"Durant ce stage, vous serez amené à ..."}}) }}
+                {{ form_errors(vueFormulaire.description) }}<br>
+
+                <label>Email</label>
+                {{ form_widget(vueFormulaire.email, {'attr' : {'placeholder':"example@gmail.com"}}) }}
+                {{ form_errors(vueFormulaire.email) }}<br>
+
+                <button type="submit" class="btn btn-dark">Enregistrer</button>
+
+                {{ form_end(vueFormulaire) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

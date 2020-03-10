@@ -13,6 +13,7 @@ use App\Repository\FormationRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Common\Persistence\ObjectManager;
 use App\Form\EntrepriseType;
+use App\Form\StageType;
 
 class ProStageController extends AbstractController
 {
@@ -27,6 +28,18 @@ class ProStageController extends AbstractController
         //Envoyer les stages récupérés à la vue qui a pour but de les afficher
         return $this->render('pro_stage/index.html.twig', ['stages'=>$stages]);
     }
+
+
+
+    public function indexEntreprises(EntrepriseRepository $repositoryEntreprise)
+    {
+        //Récupérer les entreprises en BD
+        $entreprises = $repositoryEntreprise->findAll();
+        
+        //Envoyer les entreprises récupérées à la vue chargée de les afficher
+        return $this->render('pro_stage/entreprises.html.twig', ['entreprises'=>$entreprises]);
+    }
+
 
 
     public function indexAjoutEntreprise(Request $request, ObjectManager $manager)
@@ -58,6 +71,7 @@ class ProStageController extends AbstractController
     }
 
 
+
     public function indexModifEntreprise(Request $request, ObjectManager $manager, Entreprise $entreprise)
     {
         //Création du formulaire permettant de modifier une entreprise
@@ -68,7 +82,7 @@ class ProStageController extends AbstractController
         affecte à l'objet $entreprise. */
         $formulaireEntreprise->handleRequest($request);
 
-        if ($formulaireEntreprise->isSubmitted())
+        if ($formulaireEntreprise->isSubmitted() && $formulaireEntreprise->isValid())
         {
             //Enregistrer l'entreprise en base de données
             $manager->persist($entreprise);
@@ -84,15 +98,6 @@ class ProStageController extends AbstractController
     }
 
 
-    public function indexEntreprises(EntrepriseRepository $repositoryEntreprise)
-    {
-        //Récupérer les entreprises en BD
-        $entreprises = $repositoryEntreprise->findAll();
-        
-        //Envoyer les entreprises récupérées à la vue chargée de les afficher
-        return $this->render('pro_stage/entreprises.html.twig', ['entreprises'=>$entreprises]);
-    }
-
 
     public function indexFormations(FormationRepository $repositoryFormation)
     {
@@ -104,6 +109,7 @@ class ProStageController extends AbstractController
     }
 
 
+
     public function indexStages(StageRepository $repositoryStage, $id)
     {    
         //Récupérer le stage en BD
@@ -113,6 +119,60 @@ class ProStageController extends AbstractController
         return $this->render('pro_stage/stage.html.twig', ['stage' => $stage]);
     }
 
+    public function indexAjoutStage(Request $request, ObjectManager $manager)
+    {
+        //Création d'un stage vierge qui sera rempli par le formulaire
+        $stage = new Stage();
+
+        //Création du formulaire permettant de saisir un stage
+        $formulaireStage = $this->createForm(StageType::class, $stage);
+
+        /* On demande au formulaire d'analyser la dernière requête Http. Si le tableau POST contenu dans cette requête contient
+        des variables nom, activite, etc. Alors la méthode handleRequest() recupère les valeurs de ces variables et les
+        affecte à l'objet $entreprise. */
+        $formulaireStage->handleRequest($request);
+
+        if ($formulaireStage->isSubmitted() && $formulaireStage->isValid())
+        {
+            //Enregistrer le stage en base de données
+            $manager->persist($stage);
+            $manager->flush();
+
+            //Rediriger l'utilisateur vers la page d'accueil
+            return $this->redirectToRoute('pro_stage_accueil');
+        }
+
+        //Afficher la page présentant le formulaire d'ajout d'un stage
+        return $this->render('pro_stage/ajoutModifStage.html.twig', ['vueFormulaire' => $formulaireStage->createView(), 
+        'action'=>"ajouter"]);
+    }
+
+
+
+    public function indexModifStage(Request $request, ObjectManager $manager, Stage $stage)
+    {
+        //Création du formulaire permettant de modifier un stage
+        $formulaireStage = $this->createForm(StageType::class, $stage);
+
+        /* On demande au formulaire d'analyser la dernière requête Http. Si le tableau POST contenu dans cette requête contient
+        des variables nom, activite, etc. Alors la méthode handleRequest() recupère les valeurs de ces variables et les
+        affecte à l'objet $entreprise. */
+        $formulaireStage->handleRequest($request);
+
+        if ($formulaireStage->isSubmitted() && $formulaireStage->isValid())
+        {
+            //Enregistrer le stage en base de données
+            $manager->persist($formulaireStage);
+            $manager->flush();
+
+            //Rediriger l'utilisateur vers la page d'accueil
+            return $this->redirectToRoute('pro_stage_accueil');
+        }
+
+        //Afficher la page présentant le formulaire d'ajout d'un stage
+        return $this->render('pro_stage/ajoutModifStage.html.twig', ['vueFormulaire' => $formulaireStage->createView(), 
+        'action'=>"modifier"]);
+    }
 
     public function indexStagesParNomEntreprise(StageRepository $repositoryStage, $nomEntreprise)
     {
@@ -122,6 +182,7 @@ class ProStageController extends AbstractController
         //Envoyer les stages récupérés à la vue qui a pour but de les afficher
         return $this->render('pro_stage/index.html.twig', ['stages'=>$stages]);
     }
+
 
 
     public function indexStagesParFormation(StageRepository $repositoryStage, $nomCourt)
