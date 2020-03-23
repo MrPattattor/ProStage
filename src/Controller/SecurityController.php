@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Common\Persistence\ObjectManager;
 use App\Entity\User;
@@ -37,7 +38,7 @@ class SecurityController extends AbstractController
 
 
 
-    public function register(Request $request, ObjectManager $manager)
+    public function register(Request $request, ObjectManager $manager, UserPasswordEncoderInterface $encoder)
     {
         //Création d'un utilisateur vide
         $user = new User();
@@ -52,10 +53,17 @@ class SecurityController extends AbstractController
 
         if ($formulaireUser->isSubmitted() && $formulaireUser->isValid())
         {
-            /*//Enregistrer l'utilisateur en base de données
+            //Attribuer un rôle à l'utilisateur
+            $user->setRoles(['ROLE_USER']);
+
+            //Encoder le mot de passe de l'utilisateur
+            $encodedPassword = $encoder->encodePassword($user, $user->getPassword());
+            $user->setPassword($encodedPassword);
+
+            //Enregistrer l'utilisateur en base de données
             $manager->persist($user);
             $manager->flush();
-*/
+
             //Rediriger l'utilisateur vers la page d'accueil
             return $this->redirectToRoute('app_login');
         }
