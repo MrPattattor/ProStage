@@ -128,7 +128,7 @@ class ProStageController extends AbstractController
         $formulaireStage = $this->createForm(StageType::class, $stage);
 
         /* On demande au formulaire d'analyser la dernière requête Http. Si le tableau POST contenu dans cette requête contient
-        des variables nom, activite, etc. Alors la méthode handleRequest() recupère les valeurs de ces variables et les
+        des variables nom, descriptif, etc. Alors la méthode handleRequest() recupère les valeurs de ces variables et les
         affecte à l'objet $entreprise. */
         $formulaireStage->handleRequest($request);
 
@@ -155,7 +155,7 @@ class ProStageController extends AbstractController
         $formulaireStage = $this->createForm(StageType::class, $stage);
 
         /* On demande au formulaire d'analyser la dernière requête Http. Si le tableau POST contenu dans cette requête contient
-        des variables nom, activite, etc. Alors la méthode handleRequest() recupère les valeurs de ces variables et les
+        des variables nom, descriptif, etc. Alors la méthode handleRequest() recupère les valeurs de ces variables et les
         affecte à l'objet $entreprise. */
         $formulaireStage->handleRequest($request);
 

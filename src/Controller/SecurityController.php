@@ -6,6 +6,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+use Symfony\Component\HttpFoundation\Request;
+use Doctrine\Common\Persistence\ObjectManager;
+use App\Entity\User;
+use App\Form\UserType;
 
 class SecurityController extends AbstractController
 {
@@ -29,5 +33,34 @@ class SecurityController extends AbstractController
     public function logout()
     {
 
+    }
+
+
+
+    public function register(Request $request, ObjectManager $manager)
+    {
+        //Création d'un utilisateur vide
+        $user = new User();
+
+        //Création du formulaire permettant de saisir un utilisateur
+        $formulaireUser = $this->createForm(UserType::class, $user);
+
+        /* On demande au formulaire d'analyser la dernière requête Http. Si le tableau POST contenu dans cette requête contient
+        des variables nom, prenom, etc. Alors la méthode handleRequest() recupère les valeurs de ces variables et les
+        affecte à l'objet $entreprise. */
+        $formulaireUser->handleRequest($request);
+
+        if ($formulaireUser->isSubmitted() && $formulaireUser->isValid())
+        {
+            /*//Enregistrer l'utilisateur en base de données
+            $manager->persist($user);
+            $manager->flush();
+*/
+            //Rediriger l'utilisateur vers la page d'accueil
+            return $this->redirectToRoute('app_login');
+        }
+
+        //Afficher la page présentant le formulaire d'inscription
+        return $this->render('security/inscription.html.twig', ['vueFormulaire' => $formulaireUser->createView()]);
     }
 }
