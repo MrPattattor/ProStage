@@ -16,8 +16,22 @@
 
         {% block menu %}
          <div class="p-3 mb-2" style="background-color: lightsteelblue">
-           <center><h1 class="icon-book-open" style="color:white"><a href="{{path('pro_stage_accueil')}}" style="color:white; text-decoration: none"> ProStages </a></h1></center>
-         </div>
+          <h1 class="icon-book-open" style="text-align: center; color:white"><a href="{{path('pro_stage_accueil')}}" style="color:white; text-decoration: none"> ProStages </a></h1>
+           
+          {% if is_granted('ROLE_USER') %}      
+
+          <a href="{{path('app_logout')}}" style="text-decoration: none">
+          <h3 class="icon-user" style="text-align: right; color: white">Déconnexion de {{ app.user.prenom }} {{ app.user.nom }}</h3>
+          </a>
+
+          {% else %}
+
+          <a href="{{path('app_login')}}" style="text-decoration: none">
+          <h3 class="icon-user" style="text-align: right; color: white; text-decoration: none">Connexion</h3>
+          </a>
+
+          {% endif %}
+
         {% endblock %}
           </div>
         </div>
