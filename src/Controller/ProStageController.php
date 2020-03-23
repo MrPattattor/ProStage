@@ -162,7 +162,7 @@ class ProStageController extends AbstractController
         if ($formulaireStage->isSubmitted() && $formulaireStage->isValid())
         {
             //Enregistrer le stage en base de données
-            $manager->persist($formulaireStage);
+            $manager->persist($stage);
             $manager->flush();
 
             //Rediriger l'utilisateur vers la page d'accueil

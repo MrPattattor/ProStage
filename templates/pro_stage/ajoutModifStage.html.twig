@@ -28,7 +28,21 @@
                 {{ form_widget(vueFormulaire.email, {'attr' : {'placeholder':"example@gmail.com"}}) }}
                 {{ form_errors(vueFormulaire.email) }}<br>
 
-                {{ form_row(vueFormulaire.nomEntreprise, {'label': "Entreprise"}) }}
+                <label>Nom</label>
+                {{ form_widget(vueFormulaire.nomEntreprise.nom, {'attr' : {'placeholder':"Lauak, Fiducial, Technoflex, ..."}}) }}
+                {{ form_errors(vueFormulaire.nomEntreprise.nom) }}<br>
+
+                <label>Activité principale</label>
+                {{ form_widget(vueFormulaire.nomEntreprise.activite, {'attr' : {'placeholder':"Activité de l'entreprise..."}}) }}
+                {{ form_errors(vueFormulaire.nomEntreprise.activite) }}<br>
+
+                <label>Adresse</label>
+                {{ form_widget(vueFormulaire.nomEntreprise.adresse, {'attr' : {'placeholder':"3 rue du Gaspalon 64530 PONTACQ"}}) }}
+                {{ form_errors(vueFormulaire.nomEntreprise.adresse) }}<br>
+
+                <label>Site Web</label>
+                {{ form_widget(vueFormulaire.nomEntreprise.siteWeb, {'attr' : {'placeholder':"https://example.com"}}) }}
+                {{ form_errors(vueFormulaire.nomEntreprise.siteWeb) }}<br>
 
                 {{ form_row(vueFormulaire.formations, {'label': "Formations concernées"}) }}
 
