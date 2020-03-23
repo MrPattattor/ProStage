@@ -20,23 +20,15 @@ class StageType extends AbstractType
             ->add('titre')
             ->add('description', TextareaType::class)
             ->add('email')
-            ->add('nomEntreprise', EntityType::class, array(
-
-                'class' => Entreprise::class,
-                'choice_label' => 'nom',
-
-                'multiple' => false,
-                'expanded' => true,
-            )
-            )
+            ->add('nomEntreprise', EntrepriseType::class)
             ->add('formations', EntityType::class, array(
 
                 'class' => Formation::class,
-                'query_builder' => function(FormationRepository $repoFormation){
+                /*'query_builder' => function(FormationRepository $repoFormation){
                     return $repoFormation->createQueryBuilder('f')
                         ->andWhere('f.nomCourt LIKE \'DU%\'')
                         ->orderBy('f.nomCourt', 'ASC');
-                },
+                },*/
                 'choice_label' => function(Formation $formation){
                     return $formation->getNomCourt()." ".$formation->getNomLong();
                 },

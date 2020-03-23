@@ -17,7 +17,7 @@ class EntrepriseType extends AbstractType
         $builder
             ->add('nom', TextType::class)
             ->add('activite', TextareaType::class)
-            ->add('adresse', TextType::class)
+            ->add('adresse', TextareaType::class)
             ->add('siteWeb', UrlType::class)
         ;
     }
