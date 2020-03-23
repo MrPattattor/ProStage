@@ -41,3 +41,11 @@ pro_stage_ajout_stage:
 pro_stage_modification_stage:
     path: /stage/modify/{id}
     controller: App\Controller\ProStageController::indexModifStage
+
+app_login:
+    path: /login
+    controller: App\Controller\SecurityController::login
+
+app_logout:
+    path: /logout
+    controller: App\Controller\SecurityController::logout
