@@ -10,10 +10,10 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-9">
-                {{ form_start(vueFormulaire, {'attr':{'novalidate':'novalidate'}}) }}
+                {{ form_start(vueFormulaire) }}
 
                 <label>Prénom</label>
-                {{ form_widget(vueFormulaire.prenom, {'attr' : {'placeholder':"Votre prenom..."}}) }}
+                {{ form_widget(vueFormulaire.prenom, {'attr' : {'placeholder':"Votre prénom..."}}) }}
                 {{ form_errors(vueFormulaire.prenom) }}<br>
 
                 <label>Nom</label>
@@ -24,7 +24,6 @@
                 {{ form_widget(vueFormulaire.email, {'attr' : {'placeholder':"Votre email..."}}) }}
                 {{ form_errors(vueFormulaire.email) }}<br>
 
-                <label>Mot de passe</label>
                 {{ form_widget(vueFormulaire.password, {'attr' : {'placeholder':"Votre mot de passe..."}}) }}
                 {{ form_errors(vueFormulaire.password) }}<br>
 
