@@ -28,6 +28,10 @@
               {{formationCourante.nomLong}}
             </a>
             </td>
+            <td>
+            <a href="{{ path('formation_show', {'id': formationCourante.id}) }}">Consulter</a>
+            <a href="{{ path('formation_edit', {'id': formationCourante.id}) }}">Modifier</a>
+            </td>
           </tr>
           {% endfor %}
         </tbody>
