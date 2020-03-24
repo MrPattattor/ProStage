@@ -174,6 +174,9 @@ class ProStageController extends AbstractController
         'action'=>"modifier"]);
     }
 
+
+
+
     public function indexStagesParNomEntreprise(StageRepository $repositoryStage, $nomEntreprise)
     {
         //Récupérer les stages en BD
